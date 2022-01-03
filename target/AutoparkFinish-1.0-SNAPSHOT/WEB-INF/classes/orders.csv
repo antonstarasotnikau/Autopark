@@ -1,0 +1,5 @@
+1:GRM,2,Candle,1,GRM,3,CV joint,1
+2:Filter,2,Sleeve,1
+3:CV joint,1,Filter,5,Candle,1
+4:Butter,4,Sleeve,1
+5:CV joint,1,Candle,2,Axis,1,Shaft,1

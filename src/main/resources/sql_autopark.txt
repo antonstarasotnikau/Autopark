@@ -1,0 +1,116 @@
+create table vehicles
+(
+    id                       integer not null
+        constraint vehicles_pk
+            primary key,
+    vehicle_type_id          integer,
+    model_name               varchar(255),
+    registration_number      varchar(255),
+    weight                   integer,
+    manufacture_year         integer,
+    mileage                  integer,
+    color                    varchar(255),
+    engine_name              varchar(255),
+    engine_capacity          numeric,
+    fuel_consumption_per_100 numeric,
+    tank_capacity            numeric
+);
+
+alter table vehicles
+    owner to postgres;
+
+create table types
+(
+    id       integer not null
+        constraint types_pk
+            primary key,
+    name     varchar(255),
+    coef_tax numeric
+);
+
+alter table types
+    owner to postgres;
+
+create unique index types_name_uindex
+    on types (name);
+
+create table orders
+(
+    id             serial
+        constraint orders_pk
+            primary key,
+    id_vehicle     integer,
+    name_breaking  varchar(255),
+    count_breaking integer
+);
+
+alter table orders
+    owner to postgres;
+
+create table rents
+(
+    id          serial
+        constraint rents_pk
+            primary key,
+    id_vehicle  integer,
+    data_rents  date,
+    income_rent numeric
+);
+
+alter table rents
+    owner to postgres;
+
+
+
+
+
+
+
+insert into vehicles (id, vehicle_type_id, model_name, registration_number, weight, manufacture_year, mileage, color,
+                      engine_name, tax_coefficient, engine_capacity, fuel_consumption_per_100, tank_capacity)
+values (1,1,'Volkswagen Crafter','5427 AX-7',2022,2015,376000,'BLUE','Gasoline',2,8.1,75.0);
+insert into vehicles (id, vehicle_type_id, model_name, registration_number, weight, manufacture_year, mileage, color,
+                      engine_name, engine_capacity, fuel_consumption_per_100, tank_capacity)
+values (1,1,'Volkswagen Crafter','5427 AX-7',2022,2015,376000,'BLUE','Gasoline',2,8.1,75.0);
+insert into vehicles (id, vehicle_type_id, model_name, registration_number, weight, manufacture_year, mileage, color,
+                      engine_name, engine_capacity, fuel_consumption_per_100, tank_capacity)
+values (2, 1, 'Volkswagen Crafter', '6427 AA-7', 2500, 2014, 227010, 'WHITE', 'Gasoline', 2.18, 8.5, 75.0);
+insert into vehicles (id, vehicle_type_id, model_name, registration_number, weight, manufacture_year, mileage, color,
+                      engine_name, engine_capacity, fuel_consumption_per_100, tank_capacity)
+values (3,1,'Electro Bus E321','6785 BA-7',12080,2019,20451,'GREEN','Electrical',null,50.0,150.0);
+insert into vehicles (id, vehicle_type_id, model_name, registration_number, weight, manufacture_year, mileage, color,
+                      engine_name, engine_capacity, fuel_consumption_per_100, tank_capacity)
+values (4, 2, 'Golf 5', '8682 AX-7', 1200, 2006, 230451, 'GRAY', 'Diesel', 1.6, 7.2, 55.0);
+insert into vehicles (id, vehicle_type_id, model_name, registration_number, weight, manufacture_year, mileage, color,
+                      engine_name, engine_capacity, fuel_consumption_per_100, tank_capacity)
+values (5,2,'Tesla Model S 70D','E001 AA-7',2200,2019,10454,'WHITE','Electrical',null,25.0,70.0);
+insert into vehicles (id, vehicle_type_id, model_name, registration_number, weight, manufacture_year, mileage, color,
+                      engine_name, engine_capacity, fuel_consumption_per_100, tank_capacity)
+values (6, 3, 'Hamm HD 12 VV', null, 3000, 2016, 122, 'YELLOW', 'Diesel', 3.2, 25.0, 20.0);
+insert into vehicles (id, vehicle_type_id, model_name, registration_number, weight, manufacture_year, mileage, color,
+                      engine_name, engine_capacity, fuel_consumption_per_100, tank_capacity)
+values (7, 4, 'МТЗ Беларус-1025.4', '1145 AB-7', 1200, 2020, 109, 'RED', 'Diesel', 4.75, 20.1, 135.0);
+INSERT INTO types (id, name, coef_tax) VALUES (1, 'Bus', 1.2);
+INSERT INTO types (id, name, coef_tax) VALUES (2, 'Car', 1);
+INSERT INTO types (id, name, coef_tax) VALUES (3, 'Rink', 1.5);
+INSERT INTO types (id, name, coef_tax) VALUES (4, 'Tractor', 1.2);
+INSERT INTO rents (id_vehicle, data_rents, income_rent) VALUES (1, '01.10.2021', 123.25);
+INSERT INTO rents (id_vehicle, data_rents, income_rent)VALUES (2, '11.10.2021', 68);
+INSERT INTO rents (id_vehicle, data_rents, income_rent)VALUES (5, '03.10.2021', 87);
+INSERT INTO rents (id_vehicle, data_rents, income_rent)VALUES (7, '05.10.2021', 42);
+INSERT INTO rents (id_vehicle, data_rents, income_rent)VALUES (6, '07.10.2021', 150);
+INSERT INTO rents (id_vehicle, data_rents, income_rent)VALUES (4, '10.10.2021', 47);
+INSERT INTO rents (id_vehicle, data_rents, income_rent)VALUES (6, '15.10.2021', 80);
+INSERT INTO rents (id_vehicle, data_rents, income_rent)VALUES (5, '18.10.2021', 150);
+INSERT INTO rents (id_vehicle, data_rents, income_rent)VALUES (4, '19.10.2021', 26);
+INSERT INTO rents (id_vehicle, data_rents, income_rent)VALUES (2, '20.10.2021', 60.50);
+INSERT INTO orders (id_vehicle, name_breaking, count_breaking) VALUES (1, 'GRM', 2);
+INSERT INTO orders (id_vehicle, name_breaking, count_breaking) VALUES (1, 'Candle', 1);
+INSERT INTO orders (id_vehicle, name_breaking, count_breaking) VALUES (1, 'GRM', 3);
+INSERT INTO orders (id_vehicle, name_breaking, count_breaking) VALUES (1, 'CV joint', 1);
+INSERT INTO orders (id_vehicle, name_breaking, count_breaking) VALUES (2, 'Filter', 2);
+INSERT INTO orders (id_vehicle, name_breaking, count_breaking) VALUES (2, 'Sleeve', 1);
+INSERT INTO orders (id_vehicle, name_breaking, count_breaking) VALUES (3, 'CV joint', 1);
+INSERT INTO orders (id_vehicle, name_breaking, count_breaking) VALUES (4, 'Filter', 5);
+INSERT INTO orders (id_vehicle, name_breaking, count_breaking) VALUES (4, 'Candle', 1);
+INSERT INTO orders (id_vehicle, name_breaking, count_breaking) VALUES (4, 'Butter', 4);
